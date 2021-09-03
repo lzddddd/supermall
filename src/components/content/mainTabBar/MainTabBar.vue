@@ -42,7 +42,7 @@
       </tab-bar-item>
     </tab-bar>
     <!-- 显示路由 -->
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
@@ -54,8 +54,8 @@ export default {
   name: "MainTabBar",
   components: {
     TabBar,
-    TabBarItem,
-  },
+    TabBarItem
+  }
 };
 </script>
 
