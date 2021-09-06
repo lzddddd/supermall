@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 // 懒加载
 const Home = () => import('views/home/Home')
-const Itemize = () => import('views/itemize/Itemize')
+const Category = () => import('views/category/Category')
 const Cart = () => import('views/cart/Cart')
 const Profile = () => import('views/profile/Profile')
 
@@ -20,20 +20,16 @@ const routes = [
     component: Home
   },
   {
-    path: '/itemize',
-    name: 'Itemize',
-    component: Itemize
+    path: '/category',
+    name: 'Category',
+    component: Category
   },
   {
     path: '/cart',
     name: 'Cart',
     component: Cart
   },
-  {
-    path: '/itemize',
-    name: 'Itemize',
-    component: Itemize
-  },
+
   {
     path: '/profile',
     name: 'Profile',

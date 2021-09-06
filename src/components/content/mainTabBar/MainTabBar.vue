@@ -12,7 +12,7 @@
         <h5 slot="slot-text">首页</h5>
       </tab-bar-item>
       <!-- 分类组件 -->
-      <tab-bar-item path="/itemize">
+      <tab-bar-item path="/category">
         <img slot="slot-icon" src="@/assets/img/tabbar/category.svg" />
         <img
           slot="slot-icon-active"
@@ -59,5 +59,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

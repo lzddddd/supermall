@@ -33,25 +33,25 @@ export default {
     },
     activeStyle() {
       return this.isActive ? { color: this.activeColor } : {};
-    },
+    }
   },
   props: {
     path: String,
     activeColor: {
       type: String,
-      default: "red",
-    },
+      default: "red"
+    }
   },
   methods: {
     itemClick() {
       // console.log("click");
       this.$router.push(this.path);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
 .tab-bar-item h5 {
   margin-top: 2px;
   font-size: 14px;

@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "TabBar",
+  name: "TabBar"
 };
 </script>
 
-<style>
+<style scoped>
 #tab-bar {
   position: fixed;
   display: flex;
@@ -19,6 +19,7 @@ export default {
   bottom: 0;
   background-color: #f3f3f3;
   box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.1);
+  z-index: 9;
 }
 
 .tab-bar-item {
