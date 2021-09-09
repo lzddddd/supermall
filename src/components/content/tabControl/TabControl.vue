@@ -37,7 +37,7 @@ export default {
 <style scoped>
 .tab-control {
   display: flex;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   height: 40px;
   line-height: 40px;
   font-size: 15px;

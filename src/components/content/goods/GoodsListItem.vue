@@ -1,13 +1,11 @@
 <template>
-  <div class="goods-item">
-    <a :href="goodsItem.link">
-      <img :src="goodsItem.show.img" :alt="goodsItem.title">
+  <div class="goods-item" @click="goodsItemClick">
+      <img :src="goodsItem.show.img" :alt="goodsItem.title" @load="imgLoad">
       <div class="goods-info">
         <p>{{goodsItem.title}}</p>
         <span class="price">{{goodsItem.price}}</span>
         <span class="collect">{{goodsItem.cfav}}</span>
       </div>
-    </a>
   </div>
 </template>
 
@@ -20,6 +18,17 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  methods: {
+    imgLoad() {
+      this.$bus.$emit("itemImageLoad");
+    },
+
+    // 商品点击事件
+    goodsItemClick() {
+      this.$router.push("/detail/" + this.goodsItem.iid);
+      console.log("跳转到详情页");
     }
   }
 };
