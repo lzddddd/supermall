@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="goodsItemClick">
-      <img :src="goodsItem.show.img" :alt="goodsItem.title" @load="imgLoad">
+      <img :src="showImage" :alt="goodsItem.title" @load="imgLoad">
       <div class="goods-info">
         <p>{{goodsItem.title}}</p>
         <span class="price">{{goodsItem.price}}</span>
@@ -20,15 +20,37 @@ export default {
       }
     }
   },
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img;
+    }
+  },
   methods: {
     imgLoad() {
       this.$bus.$emit("itemImageLoad");
+
+      // // 方法一：
+      // if (this.$route.path.indexOf("/home")) {
+      //   this.$bus.$emit("homeItemImgLoad");
+      // } else if (this.$route.path.indexOf("/detail")) {
+      //   this.$bus.$emit("detailItemImgLoad");
+      // }
     },
 
     // 商品点击事件
     goodsItemClick() {
-      this.$router.push("/detail/" + this.goodsItem.iid);
-      console.log("跳转到详情页");
+      // 因为推荐页面的商品的iid是找不到接口里面的商品的，暂时先不实现
+      // let iid = this.goodsItem.iid
+      //   ? this.goodsItem.iid
+      //   : this.goodsItem.item_id;
+      // console.log(iid);
+      // this.$router.push("/detail/" + iid);
+      // console.log("跳转到详情页");
+
+      // 老方法
+      // 1.获取iid
+      let iid = this.goodsItem.iid;
+      this.$router.push("/detail/" + iid);
     }
   }
 };

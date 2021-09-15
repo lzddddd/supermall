@@ -34,7 +34,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
       observeDOM: true,
-      // observeImage: true,
+      observeImage: true,
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad
     });
@@ -57,8 +57,6 @@ export default {
         // }, 2000);
       });
     }
-
-    console.log(this.scroll);
   },
   //************************************** */
 

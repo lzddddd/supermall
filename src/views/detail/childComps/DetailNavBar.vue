@@ -6,7 +6,7 @@
       </div>
       <div slot="center" class="nav-center">
         <span v-for="(item,index) in titles" :key="item"
-          @click="itemClick(index)"
+          @click="navClick(index)"
           :class="{ active: index === currentIndex }"
          >{{item}}</span>
         
@@ -23,7 +23,7 @@ export default {
   name: "DetailNavBar",
   data() {
     return {
-      titles: ["商品", "参数", "评论", "推荐"],
+      titles: ["商品", "详情", "参数", "推荐"],
       currentIndex: 0
     };
   },
@@ -38,8 +38,9 @@ export default {
     },
 
     // 切换顶部导航
-    itemClick(index) {
+    navClick(index) {
       this.currentIndex = index;
+      this.$emit("navClick", index);
     }
   }
 };

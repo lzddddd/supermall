@@ -48,11 +48,12 @@ import FeatureView from "./childComps/FeatureView";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/content/backtop/BackTop";
 
 import { getHomeMultidata, getHomeGoodsData } from "network/home";
 import { debounce } from "common/utils";
+import { itemListenMixin, backTopMixin } from "common/mixin";
 
 export default {
   name: "Home",
@@ -68,7 +69,8 @@ export default {
       },
       currentType: "pop",
       // 是否显示 “回到顶部”按钮
-      isShowBackTop: false,
+      // 混入了
+      // isShowBackTop: false,
       // tabControl 的距离顶部的位置
       tabControlTop: 0,
       // 是否显示最顶端的TabControl
@@ -77,6 +79,8 @@ export default {
       saveY: 100
     };
   },
+  //************************************** */
+  mixins: [itemListenMixin, backTopMixin],
   //************************************** */
 
   computed: {
@@ -94,13 +98,13 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
-    Scroll,
-    BackTop
+    Scroll
   },
   //************************************** */
 
   // 组件创建时回调
   created() {
+    console.log("Home Created");
     // 1. 请求首页数据
     this.getHomeMultidata();
     // 2. 请求首页商品数据
@@ -112,11 +116,10 @@ export default {
 
   mounted() {
     // 监听图片加载
-    const refresh = debounce(this.$refs.scrollComp.refresh, 200);
-    this.$bus.$on("itemImageLoad", () => {
-      refresh();
-    });
-
+    // const refresh = debounce(this.$refs.scrollComp.refresh, 200);
+    // this.$bus.$on("itemImageLoad", () => {
+    //   refresh();
+    // });
     // 监听滚动，固定tab-control
     // 需要获取tabControl的offsetTop
     // 但是组件是没有这个属性的，需要获取组件中的$el，获取组件中的元素
@@ -140,8 +143,8 @@ export default {
     this.saveY = this.$refs.scrollComp.getScrollY();
     console.log("Home deactived：" + this.saveY);
 
-    // 离开时，关掉轮播图
-    // this.$refs.hSwiper.stopTimer();
+    // 离开时，取消全局监听
+    this.$bus.$off("itemImgLoad", this.itemImgListener);
   },
   //************************************** */
 
@@ -170,16 +173,14 @@ export default {
       this.$refs.tabControl2.currentIndex = index;
     },
 
-    // 回到顶部点击监听
-    backClick() {
-      //  父组件（Home）访问子组件（Scroll）
-      this.$refs.scrollComp.scrollTo(0, 0, 500);
-    },
+    // 回到顶部点击监听（混入了）
 
     // 监听滚动
     contentScroll(position) {
       // 1.判断BackTop是否显示
-      this.isShowBackTop = position.y < -1000;
+      // this.isShowBackTop = position.y < -1000;（混入了）
+      this.listenShopBackTop(position);
+
       // 2. 判断tabControl是否固定
       // console.log(this.tabControlTop);
       this.isShowTabControl = -position.y > this.tabControlTop;
@@ -227,9 +228,8 @@ export default {
 
 <style scoped>
 #home {
-  /* position: relative; */
+  position: relative;
   height: 100vh;
-  /* padding-top: 44px; */
   font-size: 20px;
   text-align: center;
 }
