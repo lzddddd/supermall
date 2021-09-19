@@ -66,6 +66,7 @@ export default {
   padding: 15px 8px;
   border-bottom: 5px solid #f2f5f8;
 }
+
 .shop-name {
   display: flex;
   align-items: center;

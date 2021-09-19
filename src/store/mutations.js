@@ -6,6 +6,7 @@ export default {
   },
   [ADD_TO_CART](state, payload) {
     payload.product.count = 1
+    payload.product.checked = false
     state.cartList.push(payload.product)
   }
 }

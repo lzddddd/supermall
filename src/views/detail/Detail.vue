@@ -214,17 +214,24 @@ export default {
       // 获取购物车需要展示的信息
       const product = {};
       product.iid = this.iid;
+      product.shoplogo = this.shop.logo;
+      product.shopname = this.shop.name;
       product.image = this.topImages[0];
       product.title = this.goods.title;
       product.desc = this.goods.desc;
-      product.Price = this.goods.lowNowPrice;
+      product.price = this.goods.lowNowPrice;
 
       // 将商品添加到购物车
       // this.$store.cartList.push(product);
-      this.$store.dispatch({
-        type: "addToCart",
-        product
-      });
+      
+      this.$store
+        .dispatch({
+          type: "addToCart",
+          product
+        })
+        .then(res => {
+          console.log(res);
+        });
     },
 
     /**

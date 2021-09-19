@@ -130,7 +130,7 @@ export default {
   },
   //************************************** */
   activated() {
-    console.log("Home activated：" + this.saveY);
+    // console.log("Home activated：" + this.saveY);
     this.$refs.scrollComp.scrollTo(0, this.saveY);
     this.$refs.scrollComp.refresh();
     // 活跃时，打开轮播图
@@ -139,9 +139,8 @@ export default {
   //************************************** */
   deactivated() {
     // 离开Home'时，记录下滚动的位置，点回来的时候滚动到离开的位置
-    console.log("deactived");
     this.saveY = this.$refs.scrollComp.getScrollY();
-    console.log("Home deactived：" + this.saveY);
+    // console.log("Home deactived：" + this.saveY);
 
     // 离开时，取消全局监听
     this.$bus.$off("itemImgLoad", this.itemImgListener);
@@ -188,7 +187,7 @@ export default {
 
     // 下拉加载更多
     contentPullUp() {
-      console.log("Home 加载更多");
+      // console.log("Home 加载更多");
       this.getHomeGoodsData(this.currentType);
       this.$refs.scrollComp.finishPullUp();
     },
