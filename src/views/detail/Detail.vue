@@ -25,6 +25,7 @@
   <back-top  @click.native="backClick" v-show="isShowBackTop"/>
   <!-- 底部操作栏 -->
   <detail-bottom-bar @addToCart="addToCart"/>
+
    
   </div>
 </template>
@@ -57,7 +58,9 @@ import {
   GoodsParam,
   Comments
 } from "network/detail";
-import { log } from "util";
+
+import { mapActions } from "vuex";
+import { setTimeout } from "timers";
 
 export default {
   name: "Detail",
@@ -82,7 +85,7 @@ export default {
       themeTopYs: [],
       getThemeTopY: null,
       // 导航栏的index
-      currentIndex: 0
+      currentIndex: 0,
     };
   },
   //************************************** */
@@ -100,7 +103,7 @@ export default {
     DetailComment,
     DetailBottomBar,
     GoodsList,
-    Scroll
+    Scroll,
   },
   //************************************** */
 
@@ -149,6 +152,15 @@ export default {
   },
   //************************************** */
   methods: {
+    // 映射mapActions
+    // 数组方法
+    // ...mapActions(["addCart"]),
+
+    // 对象方法
+    ...mapActions({
+      addShopCart: "addCart"
+    }),
+
     // 1. 点击导航栏，返回上一页
     goBackClick() {
       console.log("click back");
@@ -223,15 +235,24 @@ export default {
 
       // 将商品添加到购物车
       // this.$store.cartList.push(product);
-      
-      this.$store
-        .dispatch({
-          type: "addToCart",
-          product
-        })
-        .then(res => {
-          console.log(res);
-        });
+
+      // 返回一个Promise
+      // this.$store
+      //   .dispatch({
+      //     type: "addCart",
+      //     product
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //   });
+
+      // 映射actions的方式
+      // 如果传递payload的方式是特殊方式，参数应该是一个对象里面放需要传递的payload
+      this.addShopCart({ product }).then(res => {
+        // 在实际调用时，只需要调用Toast里面的show函数
+        console.log(this.$toast);
+        this.$toast.show(res, 1500);
+      });
     },
 
     /**
@@ -307,4 +328,6 @@ export default {
   font-size: 18px;
   font-weight: 400;
 }
+
+
 </style>

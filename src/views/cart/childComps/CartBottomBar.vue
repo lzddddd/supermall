@@ -11,7 +11,7 @@
     </div>
 
     <!-- 结算按钮 -->
-    <div class="settlement">
+    <div class="settlement" @click="settleClick">
       <span>去结算({{checkedLength}})</span>
     </div>
   </div>
@@ -68,6 +68,14 @@ export default {
       } else {
         this.cartList.forEach(item => (item.checked = true));
       }
+    },
+
+    // 结算按钮为0时，弹出提示
+    settleClick() {
+      if (!this.isSelectAll) {
+        //如果没有任何选中
+        this.$toast.show("请选择至少一件商品");
+      }
     }
   }
 };
@@ -104,8 +112,9 @@ export default {
 }
 
 .price {
+  position: absolute;
+  right: 105px;
   line-height: 40px;
-  margin-left: 100px;
 }
 
 .orange {

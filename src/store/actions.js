@@ -4,7 +4,7 @@ import { ADD_COUNTER, ADD_TO_CART } from "./mutations-type"
 export default {
   // Detail.vue  添加购物车，验证是否商品第一次加入购物车
 
-  addToCart(context, payload) {
+  addCart(context, payload) {
     // state.cartList.push(payload.product)
     // 需要判断是否已存在该商品
 
