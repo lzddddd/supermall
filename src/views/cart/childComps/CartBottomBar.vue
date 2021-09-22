@@ -126,7 +126,7 @@ export default {
   top: 0;
   right: 0;
   width: 100px;
-  height: 40px;
+  height: 100%;
   line-height: 40px;
   color: #fff;
   background-color: var(--color-tint);
